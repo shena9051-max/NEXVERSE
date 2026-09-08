@@ -16,11 +16,13 @@ body{margin:0;background:#07090f;color:#f7f8fb;font-family:Inter,system-ui,-appl
 .post video{width:100%;height:100%;object-fit:cover;background:#000}
 .shade{position:absolute;inset:0;background:linear-gradient(transparent 42%,rgba(0,0,0,.72) 100%);pointer-events:none}
 .badge{position:absolute;top:18px;left:16px;border:1px solid #ffffff44;border-radius:99px;padding:6px 9px;font-size:8px;font-weight:900;background:#0005}
+.views{position:absolute;top:18px;right:16px;border:1px solid #ffffff44;border-radius:99px;padding:6px 9px;font-size:9px;font-weight:900;background:#0005;backdrop-filter:blur(4px)}
 .meta{position:absolute;left:16px;right:72px;bottom:22px;text-shadow:0 2px 12px #000}
 .meta small{font-weight:800}.meta h2{font-size:22px;line-height:1.03;margin:7px 0}.meta p{font-size:11px;color:#ffffffcc;line-height:1.45;margin:0 0 10px}
 .enter{background:var(--a);color:#080b10;border:0;border-radius:11px;padding:10px 12px;font-size:10px;font-weight:900}
 .actions{position:absolute;right:10px;bottom:122px;display:grid;gap:12px}
 .actions button{width:50px;height:50px;border:0;border-radius:50%;background:#0007;color:#fff;font-size:9px;backdrop-filter:blur(4px)}
+.actions .like.liked{color:#ff456d}
 .actions .own{color:var(--a)}
 .nav{height:68px;position:absolute;bottom:0;left:0;right:0;border-top:1px solid #252a38;background:#0a0d14;display:grid;grid-template-columns:repeat(5,1fr);z-index:20}
 .nav button{border:0;background:none;color:#72798b;font-size:8px;font-weight:900}.nav button.active{color:var(--a)}
@@ -40,8 +42,9 @@ body{margin:0;background:#07090f;color:#f7f8fb;font-family:Inter,system-ui,-appl
       <video src="video1.mp4" playsinline muted loop preload="metadata"></video>
       <div class="shade"></div>
       <div class="badge">AI VIDEO</div>
+      <div class="views" aria-label="再生回数">▶ <span class="view-count">0</span></div>
       <div class="actions">
-        <button class="like">♡<br><span>0</span></button>
+        <button class="like" type="button" data-like-id="video-1" aria-label="いいね" aria-pressed="false"><span class="heart" aria-hidden="true">♡</span><br><span class="like-count">0</span></button>
         <button>◯<br>0</button>
         <button class="own">◇<br>OWN</button>
       </div>
@@ -57,8 +60,9 @@ body{margin:0;background:#07090f;color:#f7f8fb;font-family:Inter,system-ui,-appl
       <video src="video2.mp4" playsinline muted loop preload="metadata"></video>
       <div class="shade"></div>
       <div class="badge">AI VIDEO</div>
+      <div class="views" aria-label="再生回数">▶ <span class="view-count">0</span></div>
       <div class="actions">
-        <button class="like">♡<br><span>0</span></button>
+        <button class="like" type="button" data-like-id="video-2" aria-label="いいね" aria-pressed="false"><span class="heart" aria-hidden="true">♡</span><br><span class="like-count">0</span></button>
         <button>◯<br>0</button>
         <button class="own">◇<br>OWN</button>
       </div>
@@ -97,10 +101,17 @@ const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     const v = entry.target.querySelector('video');
     if(!v) return;
-    if(entry.isIntersecting && entry.intersectionRatio > 0.65){
+    const isVisible = entry.isIntersecting && entry.intersectionRatio >= 0.65;
+    if(isVisible){
+      if(entry.target.dataset.isViewing !== 'true'){
+        const count = entry.target.querySelector('.view-count');
+        count.textContent = Number(count.textContent) + 1;
+        entry.target.dataset.isViewing = 'true';
+      }
       document.querySelectorAll('video').forEach(x => { if(x !== v) x.pause(); });
       v.play().catch(()=>{});
     }else{
+      entry.target.dataset.isViewing = 'false';
       v.pause();
     }
   });
@@ -108,11 +119,19 @@ const observer = new IntersectionObserver(entries => {
 posts.forEach(p=>observer.observe(p));
 
 document.querySelectorAll('.like').forEach(btn=>{
-  let liked=false;
+  const storageKey = `nexverse:like:${btn.dataset.likeId}`;
+  let liked = localStorage.getItem(storageKey) === 'true';
+  const renderLike = () => {
+    btn.classList.toggle('liked', liked);
+    btn.setAttribute('aria-pressed', String(liked));
+    btn.querySelector('.heart').textContent = liked ? '♥' : '♡';
+    btn.querySelector('.like-count').textContent = liked ? '1' : '0';
+  };
+  renderLike();
   btn.onclick=()=>{
-    liked=!liked;
-    btn.style.color=liked?'#ff6b93':'#fff';
-    btn.querySelector('span').textContent=liked?'1':'0';
+    liked = !liked;
+    localStorage.setItem(storageKey, String(liked));
+    renderLike();
   };
 });
 </script>
