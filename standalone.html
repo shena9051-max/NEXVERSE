@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<title>NEXVERSE V0.1</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#07090f;color:#f7f8fb;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+:root{--a:#d9ff46;--p:#11151e;--m:#858c9f}
+.shell{max-width:430px;height:100vh;margin:auto;background:#0b0e15;position:relative;overflow:hidden}
+.top{height:68px;padding:12px 15px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #242936;background:#0a0d14}
+.brand{font-weight:900;letter-spacing:.08em}.sub{font-size:6px;letter-spacing:.2em;color:#798095}.bal{border:1px solid #2a3040;padding:9px 11px;border-radius:12px;font-size:10px;font-weight:800}.bal b{color:var(--a)}
+.view{height:calc(100vh - 136px);overflow:auto}.hidden{display:none!important}
+.nav{height:68px;position:absolute;bottom:0;left:0;right:0;border-top:1px solid #252a38;background:#0a0d14;display:grid;grid-template-columns:repeat(5,1fr)}
+.nav button{border:0;background:none;color:#72798b;font-size:8px;font-weight:900}.nav button.active{color:var(--a)}
+.stage{height:100%;position:relative;background:linear-gradient(155deg,#181b36,#531b5c,#ff5e5b);overflow:hidden}
+.orb{position:absolute;width:120px;height:120px;border-radius:50%;border:1px solid #ffffff55;left:50%;top:33%;transform:translate(-50%,-50%);display:grid;place-items:center;box-shadow:0 0 80px #ffffff22 inset;font-size:36px}
+.badge{position:absolute;top:18px;left:16px;border:1px solid #ffffff44;border-radius:99px;padding:6px 9px;font-size:8px;font-weight:900}
+.meta{position:absolute;left:16px;right:70px;bottom:20px}.meta small{font-weight:800}.meta h2{font-size:24px;line-height:1.02;margin:7px 0}.meta p{font-size:11px;color:#ffffffcc;line-height:1.45}.enter{background:var(--a);color:#080b10;border:0;border-radius:11px;padding:10px 12px;font-size:10px;font-weight:900}
+.actions{position:absolute;right:10px;bottom:130px;display:grid;gap:12px}.actions button{width:50px;height:50px;border:0;border-radius:50%;background:#00000033;color:#fff;font-size:9px}.actions .own{color:var(--a)}
+.head{padding:24px 16px 14px}.eyebrow{font-size:8px;color:var(--a);font-weight:900;letter-spacing:.18em}.head h1{font-size:29px;line-height:1.02;margin:7px 0;letter-spacing:-.04em}
+.hero{margin:0 16px;height:250px;border-radius:24px;padding:18px;display:flex;flex-direction:column;justify-content:flex-end;background:linear-gradient(145deg,#171a35,#5c2a83,#ff6978)}.hero h2{font-size:25px;margin:7px 0}.hero p{font-size:11px;color:#ddd}.playbtn{background:var(--a);border:0;border-radius:10px;padding:10px 12px;font-weight:900;width:max-content}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:11px;padding:12px 16px 25px}.card{background:#121620;border:1px solid #242a37;border-radius:17px;overflow:hidden}.art{height:125px;padding:12px;display:flex;align-items:flex-end;font-size:9px;font-weight:900}.body{padding:10px}.body strong{display:block;font-size:12px}.body span{font-size:9px;color:#858c9f}.foot{display:flex;justify-content:space-between;align-items:center;margin-top:10px}.foot b{font-size:10px}.foot button{border:0;background:var(--a);border-radius:8px;padding:6px 9px;font-size:8px;font-weight:900}
+.create{padding:38px 16px}.create h1{font-size:31px}.option{width:100%;border:1px solid #292f3d;background:#121620;color:white;border-radius:15px;padding:17px;margin-bottom:9px;text-align:left}.option strong{display:block}.option span{font-size:9px;color:#858c9f}
+.profile{padding:24px 16px}.row{display:flex;gap:15px}.avatar{width:70px;height:70px;border-radius:20px;background:linear-gradient(145deg,#513c83,#dd4e8e);display:grid;place-items:center;font-size:25px;font-weight:900}.wallet{margin-top:22px;padding:18px;background:#171d1b;border:1px solid #303a29;border-radius:18px}.wallet strong{display:block;font-size:29px;color:var(--a)}
+</style>
+</head>
+<body>
+<div class="shell">
+  <header class="top"><div><div class="brand">NEXVERSE</div><div class="sub">AI ENTERTAINMENT NETWORK</div></div><div class="bal"><b>◈</b> 1,250 NEX</div></header>
+
+  <section id="watch" class="view">
+    <div class="stage" id="stage">
+      <div class="badge">TRENDING</div><div class="orb">✦</div>
+      <div class="actions"><button>♡<br>84K</button><button>◯<br>3.8K</button><button class="own">◇<br>OWN</button></div>
+      <div class="meta"><small>@neon_architect ✓</small><h2 id="vt">Tokyo 2097 — Rain District</h2><p id="vd">AI-generated cyber city short. Tap the world to discover the next creation.</p><button class="enter">🎮 ENTER WORLD ↗</button></div>
+    </div>
+  </section>
+
+  <section id="play" class="view hidden">
+    <div class="head"><div class="eyebrow">AI GAMES</div><h1>Play something impossible.</h1></div>
+    <div class="hero"><small>#1 TRENDING · 30 SEC INSTANT PLAY</small><h2>NEON RUNNER</h2><p>Run through a city that rebuilds itself around your play style.</p><button class="playbtn">▶ PLAY NOW</button></div>
+    <div class="grid">
+      <div class="card"><div class="art" style="background:linear-gradient(145deg,#091828,#1f4b5f,#76b6b4)">OPEN WORLD</div><div class="body"><strong>STARFALL CITY</strong><span>31K plays · ★4.8</span></div></div>
+      <div class="card"><div class="art" style="background:linear-gradient(145deg,#1e1418,#783927,#ffb45d)">SIMULATION</div><div class="body"><strong>VOID CHEF</strong><span>18K plays · ★4.7</span></div></div>
+    </div>
+  </section>
+
+  <section id="market" class="view hidden">
+    <div class="head"><div class="eyebrow">CREATOR ECONOMY</div><h1>Collect the future.</h1></div>
+    <div class="grid">
+      <div class="card"><div class="art" style="background:linear-gradient(145deg,#111827,#4c1d95,#db2777)">AI ART</div><div class="body"><strong>Moon Priestess</strong><span>@aria</span><div class="foot"><b>780 NEX</b><button>OWN</button></div></div></div>
+      <div class="card"><div class="art" style="background:linear-gradient(145deg,#052e2b,#0f766e,#f59e0b)">CHARACTER</div><div class="body"><strong>Cyber Fox</strong><span>@kuro</span><div class="foot"><b>1,600 NEX</b><button>OWN</button></div></div></div>
+      <div class="card"><div class="art" style="background:linear-gradient(145deg,#1c1917,#7f1d1d,#ef4444)">WORLD</div><div class="body"><strong>The Red District</strong><span>@neon_architect</span><div class="foot"><b>4,900 NEX</b><button>OWN</button></div></div></div>
+      <div class="card"><div class="art" style="background:linear-gradient(145deg,#0f172a,#1d4ed8,#22d3ee)">GAME</div><div class="body"><strong>Orbit Zero</strong><span>@studiozero</span><div class="foot"><b>2,400 NEX</b><button>OWN</button></div></div></div>
+    </div>
+  </section>
+
+  <section id="create" class="view hidden"><div class="create"><div class="eyebrow">BUILD THE NEXT WORLD</div><h1>What do you want to create?</h1><button class="option"><strong>✦ AI VIDEO</strong><span>Upload a generated short</span></button><button class="option"><strong>🎮 AI GAME</strong><span>Publish a browser game</span></button><button class="option"><strong>▣ AI ART</strong><span>List a collectible creation</span></button><button class="option"><strong>◎ CHARACTER</strong><span>Create a portable AI identity</span></button></div></section>
+
+  <section id="profile" class="view hidden"><div class="profile"><div class="row"><div class="avatar">S</div><div><h2>@sota</h2><p style="color:#858c9f;font-size:11px">Explorer of AI worlds.</p><small>12 Creations · 248 Followers · 31 Owned</small></div></div><div class="wallet"><small>NEX BALANCE</small><strong>1,250</strong></div><div class="head" style="padding-left:0"><div class="eyebrow">COLLECTION</div><h1 style="font-size:24px">Your owned universe.</h1></div></div></section>
+
+  <nav class="nav">
+    <button class="active" data-tab="watch">WATCH</button>
+    <button data-tab="play">PLAY</button>
+    <button data-tab="market">MARKET</button>
+    <button data-tab="create">CREATE</button>
+    <button data-tab="profile">PROFILE</button>
+  </nav>
+</div>
+<script>
+const tabs=[...document.querySelectorAll('.nav button')];
+tabs.forEach(b=>b.onclick=()=>{tabs.forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('.view').forEach(v=>v.classList.add('hidden'));document.getElementById(b.dataset.tab).classList.remove('hidden')});
+const items=[
+['Tokyo 2097 — Rain District','AI-generated cyber city short. Tap the world to discover the next creation.','linear-gradient(155deg,#181b36,#531b5c,#ff5e5b)'],
+['The Last Library on Mars','A cinematic AI world concept with a playable branch coming soon.','linear-gradient(155deg,#20131f,#6d301b,#d48d4a)'],
+['Glass Dragon','AI animation study. Original collector receives remix access.','linear-gradient(155deg,#0b2228,#126e82,#8ce5d7)']
+]; let i=0;
+document.getElementById('stage').onclick=e=>{if(e.target.tagName==='BUTTON')return;i=(i+1)%items.length;document.getElementById('vt').textContent=items[i][0];document.getElementById('vd').textContent=items[i][1];document.getElementById('stage').style.background=items[i][2]};
+</script>
+</body></html>
