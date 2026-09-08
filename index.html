@@ -22,6 +22,7 @@ body{margin:0;background:#07090f;color:#f7f8fb;font-family:Inter,system-ui,-appl
 .enter{background:var(--a);color:#080b10;border:0;border-radius:11px;padding:10px 12px;font-size:10px;font-weight:900}
 .actions{position:absolute;right:10px;bottom:122px;display:grid;gap:12px}
 .actions button{width:50px;height:50px;border:0;border-radius:50%;background:#0007;color:#fff;font-size:9px;backdrop-filter:blur(4px)}
+.actions .like.liked{color:#ff456d}
 .actions .own{color:var(--a)}
 .nav{height:68px;position:absolute;bottom:0;left:0;right:0;border-top:1px solid #252a38;background:#0a0d14;display:grid;grid-template-columns:repeat(5,1fr);z-index:20}
 .nav button{border:0;background:none;color:#72798b;font-size:8px;font-weight:900}.nav button.active{color:var(--a)}
@@ -43,7 +44,7 @@ body{margin:0;background:#07090f;color:#f7f8fb;font-family:Inter,system-ui,-appl
       <div class="badge">AI VIDEO</div>
       <div class="views" aria-label="再生回数">▶ <span class="view-count">0</span></div>
       <div class="actions">
-        <button class="like">♡<br><span>0</span></button>
+        <button class="like" type="button" data-like-id="video-1" aria-label="いいね" aria-pressed="false"><span class="heart" aria-hidden="true">♡</span><br><span class="like-count">0</span></button>
         <button>◯<br>0</button>
         <button class="own">◇<br>OWN</button>
       </div>
@@ -61,7 +62,7 @@ body{margin:0;background:#07090f;color:#f7f8fb;font-family:Inter,system-ui,-appl
       <div class="badge">AI VIDEO</div>
       <div class="views" aria-label="再生回数">▶ <span class="view-count">0</span></div>
       <div class="actions">
-        <button class="like">♡<br><span>0</span></button>
+        <button class="like" type="button" data-like-id="video-2" aria-label="いいね" aria-pressed="false"><span class="heart" aria-hidden="true">♡</span><br><span class="like-count">0</span></button>
         <button>◯<br>0</button>
         <button class="own">◇<br>OWN</button>
       </div>
@@ -118,11 +119,19 @@ const observer = new IntersectionObserver(entries => {
 posts.forEach(p=>observer.observe(p));
 
 document.querySelectorAll('.like').forEach(btn=>{
-  let liked=false;
+  const storageKey = `nexverse:like:${btn.dataset.likeId}`;
+  let liked = localStorage.getItem(storageKey) === 'true';
+  const renderLike = () => {
+    btn.classList.toggle('liked', liked);
+    btn.setAttribute('aria-pressed', String(liked));
+    btn.querySelector('.heart').textContent = liked ? '♥' : '♡';
+    btn.querySelector('.like-count').textContent = liked ? '1' : '0';
+  };
+  renderLike();
   btn.onclick=()=>{
-    liked=!liked;
-    btn.style.color=liked?'#ff6b93':'#fff';
-    btn.querySelector('span').textContent=liked?'1':'0';
+    liked = !liked;
+    localStorage.setItem(storageKey, String(liked));
+    renderLike();
   };
 });
 </script>
